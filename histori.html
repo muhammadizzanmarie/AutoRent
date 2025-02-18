@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histori Peminjaman Kendaraan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .histori-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .histori-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .histori-card img {
+            width: 100%;
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+        .histori-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .histori-card .details {
+            font-size: 14px;
+        }
+        .histori-card .details div {
+            margin-bottom: 8px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: 'histori.php', // File PHP yang mengambil data dari database
+                type: 'GET',
+                success: function(data) {
+                    $('#histori-data').html(data);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Histori Peminjaman Kendaraan</h2>
+    <div class="histori-container" id="histori-data"></div> <!-- Menampilkan data histori -->
+</body>
+</html>
