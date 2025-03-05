@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pengembalian Kendaraan</title>
+</head>
+<body>
+    <h2>Form Pengembalian Kendaraan</h2>
+    <form action="pengembalian.php" method="post" enctype="multipart/form-data">
+        <label>Nama:</label>
+        <input type="text" name="nama" required><br>
+
+        <label>Alamat:</label>
+        <textarea name="alamat" required></textarea><br>
+
+        <label>No Telepon:</label>
+        <input type="text" name="no_telepon" required><br>
+
+        <label>Instansi:</label>
+        <input type="text" name="instansi" required><br>
+
+        <label>NIK:</label>
+        <input type="text" name="nik" required><br>
+
+        <label>Jenis Kendaraan:</label>
+        <select name="kendaraan" required>
+            <option value="motor">Motor</option>
+            <option value="mobil">Mobil</option>
+        </select><br>
+
+        <label>Kondisi Kendaraan:</label>
+        <textarea name="kondisi_kendaraan" required></textarea><br>
+
+        <label>Bensin Akhir:</label>
+        <input type="number" name="bensin_akhir" required><br>
+
+        <label>Sisa E-Toll:</label>
+        <input type="number" name="sisa_etol" required><br>
+
+        <label>Tanggal Pengembalian:</label>
+        <input type="date" name="tanggal_pengembalian" required><br>
+
+        <label>Foto KTP:</label>
+        <input type="file" name="foto_ktp" accept=".jpg,.jpeg,.png" required><br>
+
+        <label>Foto Wajah:</label>
+        <input type="file" name="foto_wajah" accept=".jpg,.jpeg,.png" required><br>
+
+        <label>Keterangan:</label>
+        <textarea name="keterangan" required></textarea><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

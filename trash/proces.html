@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Peminjaman</title>
+</head>
+<body>
+    <h1>Form Peminjaman</h1>
+    <form method="POST" action="proces_form.php" enctype="multipart/form-data">
+        <label>Nama:</label><br>
+        <input type="text" name="nama" required><br><br>
+
+        <label>NIK:</label><br>
+        <input type="text" name="nik" maxlength="16" required><br><br>
+
+        <label>Alamat:</label><br>
+        <textarea name="alamat" required></textarea><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Foto KTP:</label><br>
+        <input type="file" name="foto_ktp" accept="image/*" required><br><br>
+
+        <label>Foto Diri:</label><br>
+        <input type="file" name="foto_diri" accept="image/*" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
