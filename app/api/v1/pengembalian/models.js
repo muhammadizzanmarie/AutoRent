@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../../utils/config.js'); // Sesuaikan dengan path config DB
-const Peminjaman = require('../peminjaman/models.js'); // Import model peminjaman
+const sequelize = require('../../../utils/config.js'); 
+const Peminjaman = require('../peminjaman/models.js');
 
 const Pengembalian = sequelize.define('Pengembalian', {
     id: {

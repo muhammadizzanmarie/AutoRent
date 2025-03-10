@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require("../../../utils/config.js");
-const User = require('../users/models.js'); // Perbaiki path model User
+const User = require('../users/models.js'); 
 
 const Peminjaman = sequelize.define('Peminjaman', {
     id: {
@@ -12,7 +12,7 @@ const Peminjaman = sequelize.define('Peminjaman', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'users', // Harus sesuai dengan nama tabel di database
+            model: 'users', 
             key: 'id'
         }
     },
