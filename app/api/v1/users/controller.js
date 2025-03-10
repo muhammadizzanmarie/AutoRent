@@ -1,9 +1,19 @@
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 const User = require('./models.js');
+
+const upload = multer();
+
+const handleFormData = upload.none();
 
 const register = async (req, res) => {
     try {
         const { username, nama, email, password, role } = req.body;
+
+        if (!password) {
+            return res.status(400).json({ message: "Password harus diisi" });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({ username, nama, email, password: hashedPassword, role });
@@ -30,6 +40,7 @@ const updateUser = async (req, res) => {
 
         const user = await User.findByPk(id);
         if (!user) return res.status(404).json({ message: 'User tidak ditemukan' });
+
 
         if (password) user.password = await bcrypt.hash(password, 10);
         if (username) user.username = username;
@@ -58,10 +69,9 @@ const deleteUser = async (req, res) => {
     }
 };
 
-
 module.exports = {
-    register,
+    register: [handleFormData, register], 
     getUsers,
-    updateUser,
+    updateUser: [handleFormData, updateUser],
     deleteUser
 };
