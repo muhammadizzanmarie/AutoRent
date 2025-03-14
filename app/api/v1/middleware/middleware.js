@@ -1,29 +1,52 @@
 const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+const uploadDir = 'public/uploads/';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/uploads/');
+        cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + '-' + file.originalname);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
     }
 });
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith('image/') && file.size <= 5 * 1024 * 1024) {
+    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+
+    if (allowedMimeTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
-        cb(new Error('File harus berupa gambar dan ukurannya tidak boleh lebih dari 5MB'), false);
+        cb(new Error('File harus berupa gambar (JPEG/PNG)'), false);
     }
 };
 
-const upload = multer({ storage, fileFilter });
+const upload = multer({
+    storage,
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter
+});
 
-module.exports = {
-    uploadSingle: upload.single('foto'),
-    uploadMultiple: upload.fields([
+const uploadMultiple = (req, res, next) => {
+    const uploader = upload.fields([
         { name: 'foto_ktp', maxCount: 1 },
         { name: 'foto_wajah', maxCount: 1 }
-    ])
+    ]);
+
+    uploader(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            return res.status(400).json({ message: `Multer error: ${err.message}` });
+        } else if (err) {
+            return res.status(400).json({ message: err.message });
+        }
+        next();
+    });
 };
+
+module.exports = { uploadMultiple };
