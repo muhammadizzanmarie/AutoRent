@@ -1,6 +1,5 @@
 const Pengembalian = require('./models.js');
 
-
 const createPengembalian = async (req, res) => {
     try {
         const { peminjaman_id, kondisi_kendaraan, bensin_akhir, sisa_etol, tanggal_pengembalian, keterangan, status } = req.body;
@@ -36,7 +35,6 @@ const getPengembalianById = async (req, res) => {
     }
 };
 
-
 const updatePengembalian = async (req, res) => {
     try {
         const { id } = req.params;
@@ -46,8 +44,8 @@ const updatePengembalian = async (req, res) => {
         if (!pengembalian) return res.status(404).json({ message: 'Pengembalian tidak ditemukan' });
 
         pengembalian.set({ peminjaman_id, kondisi_kendaraan, bensin_akhir, sisa_etol, tanggal_pengembalian, keterangan, status });
-
         await pengembalian.save();
+
         res.status(200).json({ message: 'Pengembalian berhasil diperbarui', pengembalian });
     } catch (error) {
         res.status(500).json({ message: 'Terjadi kesalahan', error: error.message });

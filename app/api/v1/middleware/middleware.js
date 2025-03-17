@@ -29,14 +29,16 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
     storage,
-    limits: { fileSize: 5 * 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 }, // Batas ukuran file 5MB
     fileFilter
 });
 
 const uploadMultiple = (req, res, next) => {
     const uploader = upload.fields([
-        { name: 'foto_ktp', maxCount: 1 },
-        { name: 'foto_wajah', maxCount: 1 }
+        { name: 'background', maxCount: 1 },  // Untuk Profile
+        { name: 'foto_profile', maxCount: 1 }, // Untuk Profile
+        { name: 'foto_ktp', maxCount: 1 }, // Untuk Peminjaman
+        { name: 'foto_wajah', maxCount: 1 } // Untuk Peminjaman
     ]);
 
     uploader(req, res, (err) => {
